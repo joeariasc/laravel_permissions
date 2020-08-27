@@ -13,11 +13,7 @@
                           <a href="{{route('role.create')}}" class="btn btn-primary">{{ __('Create Role') }}</a>
                         </div>
                     </div>
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    @include('custom.message')
 
                     <table class="table table-bordered table-dark text-center">
                         <thead>
