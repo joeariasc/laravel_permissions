@@ -8,6 +8,11 @@
                 <div class="card-header"><h2>{{ __('List of Roles') }}</h2></div>
 
                 <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                          <a href="{{route('role.create')}}" class="btn btn-primary">{{ __('Create Role') }}</a>
+                        </div>
+                    </div>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
