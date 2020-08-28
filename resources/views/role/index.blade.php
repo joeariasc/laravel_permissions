@@ -34,9 +34,15 @@
                                 <td>{{ $role->slug}}</td>
                                 <td>{{ $role->description}}</td>
                                 <td>{{ $role->full_access}}</td>                            
-                                <td> <a class="btn btn-info" href="{{ route('role.show',$role->id)}}">Show</a> </td>  
-                                <td> <a class="btn btn-success" href="{{ route('role.edit',$role->id)}}">Edit</a> </td>  
-                                <td> <a class="btn btn-danger" href="{{ route('role.edit',$role->id)}}">Delete</a> </td> 
+                                <td><a class="btn btn-info" href="{{ route('role.show',$role->id)}}">{{ __('Show') }}</a></td>  
+                                <td><a class="btn btn-success" href="{{ route('role.edit',$role->id)}}">{{ __('Edit') }}</a></td>  
+                                <td>
+                                    <form action="{{ route('role.destroy', $role->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">{{ __('Remove') }}</button>
+                                    </form>
+                                </td> 
                             </tr>
                             @endforeach
                         </tbody>

@@ -39,9 +39,7 @@
                                     name="description"
                                     id="description"
                                     rows="3"
-                                >
-                                {{ old('description', $role->description)}}
-                                </textarea>
+                                >{{ old('description', $role->description)}}</textarea>
                             </div>    
                             <hr>
                             <h3>{{ __('Full Access') }}</h3>
