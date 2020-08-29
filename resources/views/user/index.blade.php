@@ -30,14 +30,24 @@
                                     {{ $user->roles[0]->name}}
                                     @endisset
                                 </td>                          
-                                <td><a class="btn btn-info" href="{{ route('user.show', $user->id)}}">{{ __('Show') }}</a></td>  
-                                <td><a class="btn btn-success" href="{{ route('user.edit', $user->id)}}">{{ __('Edit') }}</a></td>  
                                 <td>
+                                    @can('view',[$user, ['user.show','user_own.show'] ])
+                                    <a class="btn btn-info" href="{{ route('user.show', $user->id)}}">{{ __('Show') }}</a>
+                                    @endcan
+                                </td>  
+                                <td>
+                                    @can('view', [$user, ['user.edit','user_own.edit'] ])
+                                    <a class="btn btn-success" href="{{ route('user.edit', $user->id)}}">{{ __('Edit') }}</a>
+                                    @endcan
+                                </td>  
+                                <td>
+                                    @can('have_access','user.destroy')
                                     <form action="{{ route('user.destroy', $user->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">{{ __('Remove') }}</button>
                                     </form>
+                                    @endcan
                                 </td> 
                             </tr>
                             @endforeach
