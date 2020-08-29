@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/role', 'RoleController')->names('role');
+Route::resource('/user', 'UserController', ['except' => ['create', 'store']])->names('user');
 
 Route::get('/test', function () {
     return 'Test Route';
