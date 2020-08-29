@@ -36,9 +36,17 @@ class PermissionInfoSeeder extends Seeder
         //Rol admin
         $rolAdmin = Role::create([
             'name' => 'Admin',
-            'slug' => 'admin',
+            'slug' => 'admin_user',
             'description' => 'Administrator',
             'full_access' => 'yes'
+        ]);
+
+        //rol Registered User
+        $rolUser = Role::create([
+            'name' => 'Registered User',
+            'slug' => 'registered_user',
+            'description' => 'Registered User',
+            'full_access' => 'no'
         ]);
 
         //role_user table
@@ -127,10 +135,10 @@ class PermissionInfoSeeder extends Seeder
             'name' => 'Show own user',
             'slug' => 'user_own.show',
             'description' => 'An user can see own user',
-        ]);        
-        
+        ]);
+
         $permission_all[] = $permission->id;
-        
+
         $permission = Permission::create([
             'name' => 'Edit own user',
             'slug' => 'user_own.edit',
