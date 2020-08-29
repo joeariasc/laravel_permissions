@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    const ADMIN = 1;
+    const REGISTERED_USER = 2;
+
     protected $fillable = [
         'name', 'slug', 'description', 'full_access',
     ];
