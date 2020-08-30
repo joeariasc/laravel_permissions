@@ -28,9 +28,11 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $permission_role = [];
+        $role = new Role;
         Gate::authorize('have_access', 'role.create');
         $permissions = Permission::get();
-        return view('role.create', compact('permissions'));
+        return view('role.form', compact('permissions', 'role', 'permission_role'));
     }
 
     /**
@@ -87,7 +89,7 @@ class RoleController extends Controller
             $permission_role[] = $permission->id;
         }
         $permissions = Permission::get();
-        return view('role.edit', compact('permissions', 'role', 'permission_role'));
+        return view('role.form', compact('permissions', 'role', 'permission_role'));
     }
 
     /**
