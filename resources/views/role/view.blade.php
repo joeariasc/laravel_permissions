@@ -100,7 +100,7 @@
                             </div>   
                             @endforeach
                         <hr>
-                        <a class="btn btn-success" href="{{route('role.edit',$role->id)}}">{{ __('Edit') }}</a>
+                        <a class="btn btn-success" href="{{route('role.edit', $role->id)}}">{{ __('Edit') }}</a>
                         <a class="btn btn-danger" href="{{route('role.index')}}">{{ __('Back') }}</a>
                      </div>
                 </div>

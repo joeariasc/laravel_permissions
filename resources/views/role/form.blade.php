@@ -5,30 +5,36 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><h2>{{ __('Create Role') }}</h2></div>
+                <div class="card-header"><h2>{{ __('Edit Role') }}</h2></div>
 
                 <div class="card-body">
                     @include('custom.message')
 
-                    <form action="{{route('role.store')}}" method="post">
+                    <form action="{{ ! $role->id ? route('role.store') : route('role.update', $role->id)}}" method="post">
                         @csrf
+                        @if ($role->id)
+                        @method('PUT')
+                        @endif
                         <div class="container">
                             <h3>{{ __('Required data') }}</h3>    
                             <div class="form-group">                            
-                                <input type="text" class="form-control" 
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
                                     id="name" 
                                     placeholder="Name"
                                     name="name"
-                                    value="{{ old('name')}}"
+                                    value="{{ old('name', $role->name)}}"
                                 >
                             </div>
                             <div class="form-group">                            
-                                <input type="text" 
+                                <input 
+                                    type="text" 
                                     class="form-control" 
                                     id="slug" 
                                     placeholder="Slug"
                                     name="slug"
-                                    value="{{ old('slug')}}"
+                                    value="{{ old('slug', $role->slug)}}"
                                 >
                             </div>
                             <div class="form-group">                   
@@ -38,9 +44,7 @@
                                     name="description"
                                     id="description"
                                     rows="3"
-                                >
-                                {{ old('description')}}
-                                </textarea>
+                                >{{ old('description', $role->description)}}</textarea>
                             </div>    
                             <hr>
                             <h3>{{ __('Full Access') }}</h3>
@@ -51,8 +55,10 @@
                                     name="full_access" 
                                     class="custom-control-input" 
                                     value="yes"
-                                    @if (old('full_access') == "yes") 
-                                        checked 
+                                    @if ( $role->full_access == "yes") 
+                                    checked 
+                                    @elseif (old('full_access') == "yes") 
+                                    checked 
                                     @endif
                                 >
                                 <label class="custom-control-label" for="full_access_yes">{{ __('Yes') }}</label>
@@ -64,10 +70,9 @@
                                     name="full_access" 
                                     class="custom-control-input" 
                                     value="no"
-                                    @if (old('full_access') == "no") 
+                                    @if ( $role->full_access == "no") 
                                     checked 
-                                    @endif
-                                    @if (old('full_access')===null) 
+                                    @elseif (old('full_access') == "no") 
                                     checked 
                                     @endif
                                 >
@@ -85,6 +90,8 @@
                                         value="{{$permission->id}}"
                                         name="permission[]"
                                         @if( is_array(old('permission')) && in_array("$permission->id", old('permission'))    )
+                                        checked
+                                        @elseif( is_array($permission_role) && in_array("$permission->id", $permission_role)    )
                                         checked
                                         @endif
                                     >
